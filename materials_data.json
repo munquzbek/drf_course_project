@@ -1,0 +1,53 @@
+[
+  {
+    "model": "materials.course",
+    "pk": 2,
+    "fields": {
+      "title": "Python",
+      "preview": "",
+      "description": "good"
+    }
+  },
+  {
+    "model": "materials.course",
+    "pk": 3,
+    "fields": {
+      "title": "Django",
+      "preview": "",
+      "description": "super good"
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 2,
+    "fields": {
+      "title": "python",
+      "description": "good",
+      "preview": "",
+      "url": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 3,
+    "fields": {
+      "title": "lesson2",
+      "description": "good",
+      "preview": "",
+      "url": null,
+      "course": 2
+    }
+  },
+  {
+    "model": "materials.lesson",
+    "pk": 4,
+    "fields": {
+      "title": "lesson3",
+      "description": "good",
+      "preview": "",
+      "url": null,
+      "course": 2
+    }
+  }
+]

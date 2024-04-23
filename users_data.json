@@ -1,0 +1,58 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$GRJYKpJ08yiUh3cBKP23qE$kmasGxr6J5NXXjQoM4v1YqqwC5xpLRzD9YCXMPuCOzA=",
+      "last_login": null,
+      "is_superuser": true,
+      "first_name": "Admin",
+      "last_name": "SkyPro",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-04-22T20:08:19.739Z",
+      "email": "admin@sky.pro",
+      "country": "KG",
+      "phone": "82848318211",
+      "avatar": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": null,
+      "course": null,
+      "lesson": null,
+      "payment_date": "2020-10-10",
+      "amount_pay": 1000,
+      "type_payment": "CASH"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 11,
+    "fields": {
+      "user": 1,
+      "course": 2,
+      "lesson": null,
+      "payment_date": "2023-10-10",
+      "amount_pay": 4000,
+      "type_payment": "CASH"
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 12,
+    "fields": {
+      "user": 1,
+      "course": null,
+      "lesson": 3,
+      "payment_date": "2024-09-01",
+      "amount_pay": 5000,
+      "type_payment": "CARD"
+    }
+  }
+]
