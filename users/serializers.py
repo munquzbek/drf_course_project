@@ -10,10 +10,14 @@ class PaymentSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    country = serializers.CharField()  # You can add extra fields to a ModelSerializer or override the default fields
-    # by declaring fields on the class, just as you would for a Serializer class.
     payment = PaymentSerializer(many=True)
 
     class Meta:
         model = User
-        fields = '__all__'
+        fields = "__all__"
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("email", "password",)
