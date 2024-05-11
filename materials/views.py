@@ -2,12 +2,14 @@ from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from materials.models import Course, Lesson
+from materials.paginators import CoursePaginator, LessonPaginator
 from materials.serializers import CourseSerializer, LessonSerializer, CourseLessonSerializer
 from users.permissions import IsModer, IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     queryset = Course.objects.all()
+    pagination_class = CoursePaginator
 
     def get_serializer_class(self):
         if self.action == "post":
@@ -49,6 +51,7 @@ class LessonListAPIView(ListAPIView):
     serializer_class = LessonSerializer
     """if user is in moders group he can view full list lessons"""
     permission_classes = [IsModer | IsOwner]
+    pagination_class = CoursePaginator
 
 
 class LessonRetrieveAPIView(RetrieveAPIView):

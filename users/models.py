@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -40,3 +41,18 @@ class Payment(models.Model):
         verbose_name = 'Оплата'
         verbose_name_plural = 'Оплаты'
         ordering = ('-payment_date',)
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь',
+                             related_name='user', **NULLABLE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс',
+                               **NULLABLE)
+
+    def __str__(self):
+        return f'{self.user} {self.course}'
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+
