@@ -7,6 +7,7 @@ from users.models import User
 
 class LessonTestCase(APITestCase):
     """testcase for CRUD all lesson view"""
+
     def setUp(self):
         self.user = User.objects.create(
             email="test@test.com",
@@ -23,6 +24,24 @@ class LessonTestCase(APITestCase):
             description="TestLesson",
             course=self.course,
             owner=self.user
+        )
+
+    def test_list_lesson(self):
+        response = self.client.get(
+            '/lms/lesson/list',
+        )
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        print(response.json())
+        self.assertEqual(
+            response.json(),
+            {'count': 1, 'next': None, 'previous': None, 'results': [
+                {'id': 5, 'title': 'TestLesson', 'description': 'TestLesson', 'preview': None, 'url': None, 'course': 4,
+                 'owner': 4}]}
+
         )
 
     def test_create_lesson(self):
@@ -47,26 +66,7 @@ class LessonTestCase(APITestCase):
             status.HTTP_201_CREATED
         )
 
-    def test_list_lesson(self):
-        response = self.client.get(
-            '/lms/lesson/list',
-        )
-
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
-        print(response.json())
-        self.assertEqual(
-            response.json(),
-            {'count': 1, 'next': None, 'previous': None, 'results': [
-                {'id': 1, 'title': 'TestLesson', 'description': 'TestLesson', 'preview': None, 'url': None, 'course': 1,
-                 'owner': 1}]}
-
-        )
-
     def test_detail_lesson(self):
-
         data = {
             "title": self.lesson.title,
             "description": self.lesson.description,
@@ -120,4 +120,3 @@ class LessonTestCase(APITestCase):
             response.status_code,
             status.HTTP_204_NO_CONTENT
         )
-

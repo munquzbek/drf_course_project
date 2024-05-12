@@ -13,4 +13,3 @@ class Command(BaseCommand):
         )
         user.set_password('qwert')
         user.save()
-

@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 from materials.models import Course, Lesson
-from materials.paginators import CoursePaginator, LessonPaginator
+from materials.paginators import CoursePaginator
 from materials.serializers import CourseSerializer, LessonSerializer, CourseLessonSerializer
 from users.permissions import IsModer, IsOwner
 
