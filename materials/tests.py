@@ -35,7 +35,7 @@ class LessonTestCase(APITestCase):
             response.status_code,
             status.HTTP_200_OK
         )
-        print(response.json())
+        # print(response.json())
         self.assertEqual(
             response.json(),
             {'count': 1, 'next': None, 'previous': None, 'results': [
