@@ -29,9 +29,11 @@ class Payment(models.Model):
                                related_name='paid_course', **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='оплаченный урок',
                                related_name='paid_lesson', **NULLABLE)
+
     payment_date = models.DateField(verbose_name='дата оплаты')
     amount_pay = models.PositiveIntegerField(verbose_name='сумма оплаты')
     type_payment = models.CharField(max_length=50, verbose_name='способ оплаты', choices=TYPE_PAYMENT)
+    url = models.URLField(max_length=1000, verbose_name='Ссылка оплаты', **NULLABLE)
 
     def __str__(self):
         return f'{self.amount_pay}$, for {self.course if self.course else self.lesson}, {self.user}'

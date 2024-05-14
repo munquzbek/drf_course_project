@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 from materials.models import Course
 from users.models import User, Payment, Subscription
 from users.serializers import UserSerializer, PaymentSerializer, UserCreateSerializer, SubscriptionSerializer
+from users.services import create_stripe_product, create_stripe_price, create_stripe_session
 
 
 class UserCreateAPIView(generics.CreateAPIView):
@@ -48,8 +49,22 @@ class PaymentViewSet(viewsets.ModelViewSet):
     filterset_fields = ('course', 'lesson', 'type_payment')
     ordering_field = ('-payment_date',)
 
+    def perform_create(self, serializer):
+        """overwriting perform create to integrate stripe(payment service)"""
+        payment = serializer.save(user=self.request.user)
+        product = create_stripe_product(payment.course)
+        price = create_stripe_price(product, payment.amount_pay)
+        # print(product)
+        # print(price)
+        session = create_stripe_session(price)
+        payment.session = session
+        # print(payment.session)
+        payment.url = payment.session.get('url')
+        payment.save()
+
 
 class SubscriptionAPIView(APIView):
+    """view for subscription to add and to delete subs"""
     serializer_class = SubscriptionSerializer
 
     def post(self, request):
