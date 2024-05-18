@@ -11,6 +11,7 @@ class Course(models.Model):
     description = models.TextField(verbose_name='описание')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='владелец',
                               help_text='укажите владельца курса')
+    last_update = models.DateTimeField(auto_now=False, verbose_name='последнее обновление', **NULLABLE)
 
     def __str__(self):
         return f'{self.title}'

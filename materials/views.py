@@ -1,9 +1,12 @@
+from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.response import Response
 
 from materials.models import Course, Lesson
 from materials.paginators import CoursePaginator
 from materials.serializers import CourseSerializer, LessonSerializer, CourseLessonSerializer
+from materials.tasks import message_update_course
 from users.permissions import IsModer, IsOwner
 
 
@@ -31,6 +34,17 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def update(self, request, *args, **kwargs):
+        """override update func when course get updated all users who have subscriptions get attention error"""
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        message_update_course.delay(instance.id)
+
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response(serializer.data)
 
 
 class LessonCreateAPIView(CreateAPIView):

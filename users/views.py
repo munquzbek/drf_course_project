@@ -80,3 +80,4 @@ class SubscriptionAPIView(APIView):
             message = 'подписка добавлена'
 
         return Response({"message": message})
+
