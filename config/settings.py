@@ -162,3 +162,10 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+CELERY_BEAT_SCHEDULE = {
+    "start_checking_login_time": {
+        "task": "users.tasks.deactivate_users",
+        "schedule": timedelta(days=1),
+    },
+}
