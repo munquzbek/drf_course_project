@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+
 from materials.models import Course
 from users.models import User, Payment, Subscription
 from users.serializers import UserSerializer, PaymentSerializer, UserCreateSerializer, SubscriptionSerializer
@@ -80,4 +81,3 @@ class SubscriptionAPIView(APIView):
             message = 'подписка добавлена'
 
         return Response({"message": message})
-

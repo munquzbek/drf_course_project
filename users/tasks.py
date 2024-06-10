@@ -14,4 +14,3 @@ def deactivate_users():
             if timezone.now().date() - user.last_login.date() > timedelta(days=30):
                 user.is_active = False
                 user.save()
-

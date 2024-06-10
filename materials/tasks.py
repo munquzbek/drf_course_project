@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.utils import timezone
 
 from materials.models import Course
-from users.models import Subscription, User
+from users.models import Subscription
 
 
 @shared_task

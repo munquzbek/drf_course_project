@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('NAME'),
-        'USER': os.getenv('USER'),
-        'PORT': os.getenv('PORT'),
-        'HOST': os.getenv('HOST'),
-        'PASSWORD': os.getenv('PASSWORD')
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PORT': os.getenv('POSTGRES_PORT'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD')
     }
 }
 
@@ -152,8 +152,8 @@ SIMPLE_JWT = {
 STRIPE_KEY = os.getenv('STRIPE_KEY')
 
 # urls for redis broker
-CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
-CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
 # email settings
 EMAIL_HOST = 'smtp.yandex.ru'
